@@ -1,0 +1,23 @@
+CREATE TABLE #sp_who2 (SPID INT,Status VARCHAR(255),
+      Login  VARCHAR(255),HostName  VARCHAR(255), 
+      BlkBy  VARCHAR(255),DBName  VARCHAR(255), 
+      Command VARCHAR(255),CPUTime INT, 
+      DiskIO INT,LastBatch VARCHAR(255), 
+      ProgramName VARCHAR(255),SPID2 INT, 
+      REQUESTID INT) 
+
+INSERT INTO #sp_who2 EXEC sp_who2
+
+--FIND BLOCKED PROCESSES (IGNORING PARALLELSIM)
+SELECT * 
+FROM #sp_who2
+WHERE BlkBy<>'  .' AND SPID<>BlkBy
+ORDER BY SPID ASC
+
+--FIND HEAD LOCKERS
+SELECT *
+FROM #sp_who2
+WHERE SPID IN (SELECT BlkBy FROM #sp_who2 WHERE BlkBy<>'  .' AND SPID<>BlkBy GROUP BY BlkBy)
+AND blkBy='  .'
+
+DROP TABLE #sp_who2
