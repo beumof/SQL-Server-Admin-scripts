@@ -13,7 +13,6 @@
             else o.principal_id
         end as principal_id
     from sys.objects o
-    inner join sys.schemas s
     on o.schema_id = s.schema_id
     where o.is_ms_shipped = 0
     and o.type in ('U', 'FN', 'FS', 'FT', 'IF', 'P', 'PC', 'TA', 'TF', 'TR', 'V')
