@@ -14,7 +14,8 @@ FROM (
   END As Type,
   max(backup_finish_date) AS lastBackup
   FROM msdb..backupset
-  --WHERE description like 'TDPSQL%' -- uncomment to filter backups made with TDPSQL
+  WHERE database_name NOT IN ('master','msdb','model','distribution') -- comment to include system dbs
+  --AND description like 'TDPSQL%' -- uncomment to filter backups made with TDPSQL
   GROUP BY database_name, type
 ) AS SourceTable PIVOT (max(lastBackup) FOR type IN ([Full],[Differential],[Transaction_Log])) As bu
 INNER JOIN master.sys.databases db ON bu.database_name = db.name
