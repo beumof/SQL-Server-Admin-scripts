@@ -4,19 +4,27 @@
 --Commentaries: Check last backup per DB in the instance
 
 --CHECK Latest DB Backups (Full, Differential and T-log)
-SELECT bu.database_name, recovery_model_Desc AS [Recovery_Model],[Full],[Differential],[Transaction_Log]
+--CHECK Latest DB Backups (Full, Differential and T-log)
+SELECT bu.*, recovery_model_Desc AS [Recovery_Model]
 FROM (
   SELECT database_name,
+  CASE 
+                WHEN physical_device_name LIKE 'TDPSQL%' THEN 'TDP'
+                WHEN physical_device_name LIKE '{%' THEN 'TSMVE'
+                ELSE 'DISK'
+  END As Method,
   CASE [type]
     WHEN 'D' THEN 'Full'
     WHEN 'I' THEN 'Differential'
     WHEN 'L' THEN 'Transaction_Log'
   END As Type,
   max(backup_finish_date) AS lastBackup
-  FROM msdb..backupset
-  WHERE database_name NOT IN ('master','msdb','model','distribution') -- comment to include system dbs
-  --AND description like 'TDPSQL%' -- uncomment to filter backups made with TDPSQL
-  GROUP BY database_name, type
+  FROM msdb..backupset s
+  INNER JOIN msdb.dbo.backupmediafamily m ON s.media_set_id = m.media_set_id
+  WHERE database_name NOT IN ('master','msdb','model','distribution') -- Comment to include system dbs
+GROUP BY database_name, CASE WHEN physical_device_name LIKE 'TDPSQL%' THEN 'TDP' WHEN physical_device_name LIKE '{%' THEN 'TSMVE' ELSE 'DISK' END, type
 ) AS SourceTable PIVOT (max(lastBackup) FOR type IN ([Full],[Differential],[Transaction_Log])) As bu
 INNER JOIN master.sys.databases db ON bu.database_name = db.name
+--WHERE Method = 'TSMVE' -- Possible methods TDP, TSMVE, DISK
 ORDER BY bu.database_name
+
