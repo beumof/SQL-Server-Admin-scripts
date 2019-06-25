@@ -1,5 +1,9 @@
+--File: Backups/SQLBackups_BackupsChain.sql
+--Compilled in https://github.com/beumof/SQL-Server-Admin-scripts
+--Added in 2019-05
+
 -- CHECK DIFFERENTIAL DB BACKUPS SET (CHAIN)
-SELECT 
+SELECT
 s.backup_start_date as 'Start Date',
 s.backup_finish_date as 'Full Date',
 CONVERT(varchar, s.backup_finish_date, 103) as 'Date',
@@ -7,7 +11,7 @@ CONVERT(VARCHAR(8),s.backup_finish_date,108) as 'Time',
 DATEDIFF(minute, s.backup_start_date, s.backup_finish_date) as 'Duration (minutes)',
 s.database_name as 'Database Name',
 CAST(s.backup_size / (1024*1024) as int)  as 'DBSize (MBs)',
-CASE 
+CASE
 WHEN (s.[type] = 'D' AND s.is_copy_only = 0) THEN 'Full'
 WHEN (s.[type] = 'D' AND s.is_copy_only = 1) THEN 'Full - CopyOnly'
 WHEN (s.[type] = 'I') THEN 'Differential database'
@@ -25,7 +29,7 @@ t.backup_finish_date as 'Differential base - Full Date',
 s.[user_name] as [User]
 FROM msdb.dbo.backupset s
 INNER JOIN msdb.dbo.backupmediafamily m ON s.media_set_id = m.media_set_id
-LEFT JOIN 
+LEFT JOIN
 (SELECT ss.backup_set_uuid, ss.backup_finish_date, mm.physical_device_name
 FROM msdb.dbo.backupset ss
 INNER JOIN msdb.dbo.backupmediafamily mm ON ss.media_set_id = mm.media_set_id
