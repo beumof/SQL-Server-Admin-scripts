@@ -24,7 +24,7 @@ FROM (
   AND database_name NOT IN ('master','msdb','model','distribution') -- Comment to include system dbs
   --AND backup_finish_date between '2019-01-01 10:00' and '2019-04-16 09:00'
 GROUP BY server_name,database_name, CASE WHEN physical_device_name LIKE 'TDPSQL%' THEN 'TDP' WHEN physical_device_name LIKE '{%' THEN 'TSMVE' ELSE 'DISK' END, type
-) AS SourceTable PIVOT (max(lastBackup) FOR type IN ([Full],[Differential],[Transaction_Log])) As bu
+) AS SourceTable PIVOT (max(lastBackup) FOR Type IN ([Full],[Differential],[Transaction_Log])) As bu
 INNER JOIN master.sys.databases db ON bu.database_name = db.name
 WHERE Method = 'TDP' -- Possible methods TDP, TSMVE, DISK
 ORDER BY bu.database_name
