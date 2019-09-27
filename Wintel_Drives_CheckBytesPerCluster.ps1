@@ -1,1 +1,0 @@
-Get-WmiObject -Query "SELECT Label, Blocksize, Name FROM Win32_Volume WHERE FileSystem='NTFS'" -ComputerName '.' | Select-Object Name, Label, Blocksize
