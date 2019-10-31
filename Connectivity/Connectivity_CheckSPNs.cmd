@@ -15,7 +15,7 @@ setspn -l <serviceAccount>
 
 
 :: List SPNs registered for a SQL Server, searching by server
-setspn -l MSSQLSvc/<FQDN>:<port>
+setspn -q MSSQLSvc/<FQDN>:<port>
 
 :: Example of a correct output
 :: C:>setspn -q MSSQLSvc/mymachine.mydomain.com:1433
