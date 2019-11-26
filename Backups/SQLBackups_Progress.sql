@@ -1,3 +1,7 @@
+--File: Backups/SQLBackups_Progress.sql
+--Compilled in https://github.com/beumof/SQL-Server-Admin-scripts
+--Added in 2019-06-25
+
 --BACKUP - PROGRESS (%)
 SELECT r.session_id,
 r.command,
