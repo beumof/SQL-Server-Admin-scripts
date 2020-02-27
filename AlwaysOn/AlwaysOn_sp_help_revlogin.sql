@@ -1,4 +1,3 @@
-
 --File: AlwaysOn\AlwaysOn_sp_help_revlogin.sql
 --Extracted from https://support.microsoft.com/en-us/help/918992/how-to-transfer-logins-and-passwords-between-instances-of-sql-server
 --Compilled in https://github.com/beumof/SQL-Server-Admin-scripts
