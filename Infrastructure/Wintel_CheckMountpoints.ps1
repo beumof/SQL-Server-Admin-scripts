@@ -3,7 +3,7 @@
 # Compilled in https://github.com/beumof/SQL-Server-Admin-scripts
 # Added in 2020-07-02
 
-Get-WmiObject Win32_Volume -Filter "DriveType='3'" | ForEach {
+Get-WmiObject Win32_Volume -Filter "DriveType='3'" | ForEach-Object {
     New-Object PSObject -Property @{
         Name = $_.Name
         Label = $_.Label
