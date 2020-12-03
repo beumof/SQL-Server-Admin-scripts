@@ -7,6 +7,7 @@ SELECT TOP 100
 s.database_name,
 m.physical_device_name,
 CAST(CAST(s.backup_size / 1000000 AS INT) AS VARCHAR(14)) + ' ' + 'MB' AS bkSize,
+CAST(CAST(s.compressed_backup_size / 1000000 AS INT) AS VARCHAR(14)) + ' ' + 'MB' AS bkCompressedSize,
 CAST(DATEDIFF(second, s.backup_start_date,
 s.backup_finish_date) AS VARCHAR(15)) + ' ' + 'Seconds' TimeTaken,
 s.backup_start_date,
