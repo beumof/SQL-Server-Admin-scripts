@@ -12,8 +12,9 @@ AND [name] NOT LIKE 'BUILTIN%'
 
 
 /* Old version, it creates the login if it does not exist, but sp will be deprecated
+-- EXEC master..sp_change_users_login 'report' -- list users to fix
 
-SELECT 'EXEC sp_change_users_login ''auto_fix'','''+[name]+''''
+SELECT 'EXEC master..sp_change_users_login ''auto_fix'','''+[name]+''''
 FROM sysusers
 WHERE sid IS NOT NULL 
 AND [name] NOT IN ('dbo','guest','public') 
