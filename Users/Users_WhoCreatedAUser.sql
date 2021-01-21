@@ -1,3 +1,7 @@
+--File: Users\Users_WhoCreatedAUser.sql
+--Compilled in https://github.com/beumof/SQL-Server-Admin-scripts
+--Added in 2021-01-21
+
 --Find who created a user/login
 --This will only work if the info's still logged on the SQL default traces. 
 --SQL does not register this info by default.

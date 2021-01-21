@@ -1,3 +1,7 @@
+--File: Users\Users_AuditUsersLists.sql
+--Compilled in https://github.com/beumof/SQL-Server-Admin-scripts
+--Added in 2021-01-21
+
 -- GENERATE LOGIN/USER LIST FOR AUTIDORY PURPOSES
 
 CREATE TABLE #results (   

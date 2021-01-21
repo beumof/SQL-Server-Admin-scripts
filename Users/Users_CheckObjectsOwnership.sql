@@ -1,4 +1,4 @@
---File: Users\CheckObjestsOwnerships.sql
+--File: Users\Users_CheckObjestsOwnerships.sql
 --Extracted from https://dba.stackexchange.com/questions/33551/can-i-retrieve-all-database-objects-owned-by-a-particular-userthe-database-size-and-improve-performance-in-sql-server/
 --Compilled in https://github.com/beumof/SQL-Server-Admin-scripts
 --Added in 2019-05-09
