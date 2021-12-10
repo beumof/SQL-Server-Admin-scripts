@@ -16,10 +16,11 @@ AND DDIPS.index_id = I.index_id
 WHERE DDIPS.database_id = DB_ID()
 and I.name is not null
 AND DDIPS.avg_fragmentation_in_percent > 0
---AND T.name IN ('') --uncomment to filter by tablename.
+--AND T.name IN ('<TableName>') --uncomment to filter by tablename.
 ORDER BY DDIPS.avg_fragmentation_in_percent desc
 
 
+-- Another option
 
 select 
     index_id, partition_number, alloc_unit_type_desc
