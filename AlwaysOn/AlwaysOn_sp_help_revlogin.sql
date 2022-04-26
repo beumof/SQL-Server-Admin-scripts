@@ -4,7 +4,7 @@
 --Added in 2019-08-22
 
 -- This script will create the SP sp_help_revlogin
--- Once created, executed in primary node, and then execute the result in secondary node. 
+-- Once created, execute it in primary node, and then execute the result in secondary node. 
 
 USE master
 GO

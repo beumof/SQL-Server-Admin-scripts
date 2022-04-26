@@ -14,14 +14,8 @@ select
     ,ius.last_user_scan as [Last Scan], ius.last_user_lookup as [Last Lookup]
     ,ius.last_user_update as [Last Update]
 from 
-    sys.tables t with (nolock) join sys.indexes i with (nolock) on
-        t.object_id = i.object_id
-    join sys.schemas s with (nolock) on 
-        t.schema_id = s.schema_id
-    left outer join sys.dm_db_index_usage_stats ius on
-        ius.database_id = db_id() and
-        ius.object_id = i.object_id and 
-        ius.index_id = i.index_id
-order by
-    s.name, t.name, i.index_id
+    sys.tables t with (nolock) join sys.indexes i with (nolock) on t.object_id = i.object_id
+    join sys.schemas s with (nolock) on t.schema_id = s.schema_id
+    left outer join sys.dm_db_index_usage_stats ius on ius.database_id = db_id() and ius.object_id = i.object_id and ius.index_id = i.index_id
+order by s.name, t.name, i.index_id
 option (recompile)

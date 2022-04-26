@@ -1,3 +1,7 @@
+--File: Performance/Performance_BlockedProcesses.sql
+--Compilled in https://github.com/beumof/SQL-Server-Admin-scripts
+--Added in 2021-10-01
+
 CREATE TABLE #sp_who2 (SPID INT,Status VARCHAR(255),
       Login  VARCHAR(255),HostName  VARCHAR(255), 
       BlkBy  VARCHAR(255),DBName  VARCHAR(255), 
