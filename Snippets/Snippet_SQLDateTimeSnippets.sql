@@ -4,3 +4,6 @@
 
 -- Get Date_Time formated. IE: 20210127_102157
 SELECT CONVERT(VARCHAR(20),GETDATE(),112) + '_' + REPLACE(CONVERT(VARCHAR(20),GETDATE(),108),':','')
+
+-- To generate job log with _<DATE>_<TIME> suffix
+<PATH>\<LOGNAME>_$(ESCAPE_NONE(STRTDT))-$(ESCAPE_NONE(STRTTM)).log
